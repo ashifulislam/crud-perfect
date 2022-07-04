@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Repository\CustomerRepository;
 use App\Http\Repository\UserRepository;
+use App\Models\Customer\Customer;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,11 @@ class CustomerService extends CommonService
         $this->repository = new CustomerRepository();
         parent::__construct($this->repository);
     }
+    public function customerList()
+    {
+        $customers = Customer::with('user')->get();
+        return $customers;
+    }
     public function createCustomer($data)
     {
         DB::beginTransaction();
@@ -32,7 +38,6 @@ class CustomerService extends CommonService
             ]);
 
             $customerRepo = new CustomerRepository();
-
             $customerRepo->create([
                 'user_id'=>$user->id,
                 'password_text'=>$data['password'],

@@ -10,31 +10,23 @@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Nid</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
+            @foreach($customer as $customerDetails)
             <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011-04-25</td>
-                <td>$320,800</td>
+                <td>{{$customerDetails->user->username}}</td>
+                <td>{{$customerDetails->user->email}}</td>
+                <td>{{$customerDetails->gender}}</td>
+                <td>{{$customerDetails->nid}}</td>
+                <td>Edit | Delete</td>
             </tr>
-            <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011-07-25</td>
-                <td>$170,750</td>
-            </tr>
+            @endforeach
             </tfoot>
         </table>
             </div>

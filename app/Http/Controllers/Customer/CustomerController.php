@@ -17,7 +17,8 @@ class CustomerController extends Controller
     //viewing all customer
     public function customerList()
     {
-        return view('customer.customerList');
+        $data['customer'] = $this->service->customerList();
+        return view('customer.customerList',$data);
     }
     public function customerAdd()
     {
