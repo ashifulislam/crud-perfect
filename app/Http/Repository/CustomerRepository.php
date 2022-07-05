@@ -10,4 +10,8 @@ class CustomerRepository extends CommonRepository
         $this->model = new Customer();
         parent::__construct($this->model);
     }
+    function deleteCustomer($id)
+    {
+        return $this->model->where('user_id',$id)->delete();
+    }
 }

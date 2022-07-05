@@ -11,4 +11,8 @@ class UserRepository extends CommonRepository
         $this->model = new User();
         parent::__construct($this->model);
     }
+    function deleteCustomer($id)
+    {
+        return $this->model->where('id',$id)->delete();
+    }
 }

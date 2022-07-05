@@ -24,7 +24,7 @@
                 <td>{{$customerDetails->user->email}}</td>
                 <td>{{$customerDetails->gender}}</td>
                 <td>{{$customerDetails->nid}}</td>
-                <td>Edit | Delete</td>
+                <td><a href="{{route('customer.customerEdit',encrypt($customerDetails->user->id))}}">Edit </a>| <a href="{{route('customer.customerDelete',encrypt($customerDetails->user->id))}}">Delete</a> </td>
             </tr>
             @endforeach
             </tfoot>

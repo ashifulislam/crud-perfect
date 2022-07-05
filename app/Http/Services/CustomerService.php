@@ -60,5 +60,57 @@ class CustomerService extends CommonService
             ];
         }
     }
+    public function updateCustomer($data)
+    {
+        DB::beginTransaction();
+        try{
+            $customerRepo = new CustomerRepository();
+            $customerRepo->update(['user_id'=>$data['id']], [
+                'nid' => $data['nid'],
+                'gender'=>$data['gender'],
+            ]);
+
+            $userRepo = new UserRepository();
+            $userRepo->update(['id'=>$data['id']], [
+                    'username'=>$data['username'],
+                    'email'=>$data['email'],
+                    'password'=>Hash::make($data['password'])
+                ]);
+            DB::commit();
+            return [
+                'status' => true,
+                'message' =>__('Customer has been updated successfully')
+            ];
+        }catch(\Exception $e)
+        {
+            DB::rollBack();
+            return[
+                'status'=>false,
+                'message' =>__('Something went wrong').$e->getMessage()
+            ];
+        }
+    }
+    public function deleteCustomer($id)
+    {
+        DB::beginTransaction();
+        try{
+            $userRepo = new UserRepository();
+            $customerRepo = new CustomerRepository();
+            $userRepo->deleteCustomer($id);
+            $customerRepo->deleteCustomer($id);
+            DB::commit();
+            return[
+                'status' => true,
+                'message' => __('Customer has been deleted successfully')
+            ];
+        }catch(\Exception $e)
+        {
+            DB::rollback();
+            return[
+                'status' => false,
+                'message' => __('Something went wrong man'). $e->getMessage()
+            ];
+        }
+    }
 
 }

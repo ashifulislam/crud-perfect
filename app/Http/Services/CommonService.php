@@ -8,5 +8,9 @@ class CommonService
     {
         $this->repository = $repository;
     }
+    function getCustomerByUserId($user_id)
+    {
+        return $this->repository->getCustomerByUserId($user_id);
+    }
 
 }
